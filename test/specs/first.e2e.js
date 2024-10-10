@@ -1,0 +1,20 @@
+const { expect } = require('chai');
+describe('Test Suite', () => {
+    it('First Test', async () => {
+        const option = $("//android.view.ViewGroup[@content-desc='open menu']/android.widget.ImageView")
+        await option.click()
+        const Login = $("//android.widget.TextView[@text='Log In']")
+        await Login.waitForDisplayed({ timeout: 3000 })
+        await Login.click()
+        const username = $("//android.widget.EditText[@content-desc='Username input field']")
+        await username.setValue('bob@example.com')
+        const pwd = $("//android.widget.EditText[@content-desc='Password input field']")
+        await pwd.setValue('10203040')
+        const login = $("(//android.widget.TextView[@text='Login'])[2]")
+        await login.click()
+        const products = $('//android.widget.TextView[@text="Products"]')
+        await products.waitForDisplayed({ timeout: 2000 })
+        const prodText = await products.getText()
+        await expect(prodText).to.equal("Products")
+    })
+})
